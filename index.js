@@ -5,6 +5,8 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
+const { checkToken } = require("./src/middlewares/jwt.middleware");
+
 // Middleware to parse json body
 app.use(express.json());
 
@@ -14,6 +16,10 @@ app.use(express.json());
 // Import user routes
 const userRoutes = require("./src/routes/user.route");
 app.use("/api/user", userRoutes);
+
+// Import product categories routes
+const productCategoryRoutes = require("./src/routes/product_category.route");
+app.use("/api/product/categories", checkToken, productCategoryRoutes);
 
 // ------------
 
