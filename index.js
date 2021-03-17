@@ -21,6 +21,10 @@ app.use("/api/user", userRoutes);
 const productCategoryRoutes = require("./src/routes/product_category.route");
 app.use("/api/product/categories", checkToken, productCategoryRoutes);
 
+// Import products routes
+const productRoutes = require("./src/routes/product.route");
+app.use("/api/products", checkToken, productRoutes);
+
 // ------------
 
 const port = process.env.APP_PORT || 5000;
