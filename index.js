@@ -11,9 +11,9 @@ app.use(express.json());
 // Routes import
 // ------------
 
-app.get("/api/", (req, res) => {
-  return res.send("Node JS API");
-});
+// Import user routes
+const userRoutes = require("./src/routes/user.route");
+app.use("/api/user", userRoutes);
 
 // ------------
 
