@@ -1,3 +1,6 @@
+// Load environment variables from .env file
+require("dotenv").config();
+
 // Express JS
 const express = require("express");
 const app = express();
@@ -14,4 +17,5 @@ app.get("/api/", (req, res) => {
 
 // ------------
 
-app.listen(5000, () => console.log("Listening on port 5000"));
+const port = process.env.APP_PORT || 5000;
+app.listen(port, () => console.log(`Listening on port ${port}`));
