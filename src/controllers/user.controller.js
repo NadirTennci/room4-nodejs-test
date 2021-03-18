@@ -25,7 +25,7 @@ exports.register = (req, res) => {
   body.password = hashSync(req.body.password, salt);
   const reqData = new UserModel(req.body);
   UserModel.create(reqData, (user, err) => {
-    if (err) return res.status(400).send(err.message);
+    if (err) return res.status(409).send(err.message);
     res.json({
       status: true,
       message: "User Created Successfully",

@@ -57,7 +57,7 @@ User.getByLogin = (login, result) => {
 User.create = (userReqData, result) => {
   dbConn.query("INSERT INTO users SET ? ", userReqData, (err, res) => {
     if (err) {
-      console.log("Error while inserting data");
+      console.log("User already exists");
       result(null, err);
     } else {
       console.log("User created successfully");
