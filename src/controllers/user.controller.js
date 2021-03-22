@@ -72,7 +72,7 @@ exports.login = (req, res) => {
         expiresIn: expiresIn,
       });
     } else {
-      return res.status(400).send("Access Denied! Unauthorized User");
+      return res.status(401).send("Access Denied! Unauthorized User");
     }
   });
 };

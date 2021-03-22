@@ -30,7 +30,7 @@ exports.create = (req, res) => {
 
   const reqData = new ProductCategoryModel(req.body);
   ProductCategoryModel.create(reqData, (productCategory, err) => {
-    if (err) return res.status(400).send(err.message);
+    if (err) return res.status(409).send(err.message);
     res.json({
       status: true,
       message: "Product Category Created Successfully",
@@ -51,7 +51,7 @@ exports.update = (req, res) => {
     req.params.id,
     reqData,
     (productCategory, err) => {
-      if (err) return res.status(400).send(err.message);
+      if (err) return res.status(409).send(err.message);
       res.json({
         status: true,
         message: "Product Category updated Successfully",

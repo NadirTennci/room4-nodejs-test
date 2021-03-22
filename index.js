@@ -5,6 +5,37 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
+// Swagger
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUI = require("swagger-ui-express");
+const swaggerOptions = {
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "ROOM4 Test Task API",
+      description: "ROOM4 test task api library documentation",
+      version: "1.00",
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
+  },
+  apis: ["./src/routes/*.js"],
+};
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
 const { checkToken } = require("./src/middlewares/jwt.middleware");
 
 // Middleware to parse json body
@@ -27,7 +58,9 @@ app.use("/api/products", checkToken, productRoutes);
 
 // ------------
 
+// Launch server
 const port = process.env.APP_PORT || 5000;
 const server = app.listen(port, () => console.log(`Listening on port ${port}`));
 
+// Export server for Mocha Chai testing
 module.exports = server;
